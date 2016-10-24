@@ -1,0 +1,54 @@
+﻿<h1>Bienvenido</h1><hr>
+
+<div class="col-xs-12 col-sm-6">
+	<button class="btn btn-primary" ng-click="getProducts()">Ver todos los productos</button>
+</div>
+
+<div class="col-xs-12 col-sm-6 text-right">
+	<button class="btn btn-success" ng-click="addProduct()">Nuevo producto</button>
+</div>
+<hr>
+<div class="col-xs-12" ng-show="addNew">
+	<form name="form" ng-submit="saveProduct(newName)" role="form">
+		<div class="form-group">
+		    <label for="username">Nombre</label>
+		    <input type="text" class="form-control" ng-model="newName" required />
+		    <span ng-show="form.productname.$dirty && form.productname.$error.required" class="help-block">Requerido</span>
+		</div>
+		<div class="form-actions">
+		    <button type="submit" ng-disabled="form.$invalid" class="btn btn-success text-right">Guardar</button>
+		</div>
+	</form>
+</div>
+
+<div class="col-xs-12">
+	<div class="table" ng-show="showProducts">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Producto</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="products in allProducts">
+					<td>{{products.id}}</td>
+					<td>
+						<span ng-hide="editing" ng-click="editItem()">{{products.name}}</span>
+                		<input ng-show="editing" ng-model="products.name" ng-blur="doneEditing(products)" />
+                		<!-- <div contentEditable="true" name="nameProduct" id="" ng-model="nameProduct">{{products.name}}</div> -->
+                	</td>
+					<td><button ng-click="edit()" class="btn btn-primary">Editar</button></td>
+					<td><button ng-click="delete()" class="btn btn-danger">Eliminar</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="col-xs-12 text-right">
+	<hr>
+	<a href="#/login" class="btn btn-danger">Cerrar sesión</a>
+</div>
